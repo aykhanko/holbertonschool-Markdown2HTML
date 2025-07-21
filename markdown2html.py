@@ -1,17 +1,17 @@
 #!/usr/bin/python3 
 
-import sys 
-
-arg1 = "README.md"
-arg2 = "README.html"
-count = len(sys.argv)
-
-def missing_arg(arg):
-    if arg not in sys.argv:
-        print(f"Missing {arg}")
-        sys.exit(1)
+import sys
+import os
 
 if __name__ == "__main__":
-    missing_arg(arg1)
-    missing_arg(arg2)
+    if len(sys.argv) < 3:
+        sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
+        sys.exit(1)
+
+    if not os.path.isfile("README.md"):
+        sys.stderr.write("Missing README.md\n")
+        sys.exit(1)
+
     sys.exit(0)
+
+
