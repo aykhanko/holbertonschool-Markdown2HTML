@@ -7,13 +7,25 @@ with open("README.md", "r") as f:
     markdown_text_list = f.readlines()
 
 def markdown_html(text):
-    symbol = "#"
-    count = text.count(symbol)
-    raw_text = text[count+1:].strip()
+    if not text.startswith("#"):
+        return  #
+
+    count = 0
+    for char in text:
+        if char == '#':
+            count += 1
+        else:
+            break  
+    if count > 6 or text[count] != " ":
+        return  
+    raw_text = text[count + 1:].strip()
     html_text = f"<h{count}>{raw_text}</h{count}>\n"
 
-    with open ("README.html", "a", encoding = "UTF-8") as f:
+    with open("README.html", "a", encoding="UTF-8") as f:
         f.write(html_text)
+
+
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
